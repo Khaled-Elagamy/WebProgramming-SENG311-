@@ -87,11 +87,12 @@ namespace LAB2.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Layout = "_Lab2Layout";
             return View(_employees);
         }
         public IActionResult Details(int id = 1)
         {
-
+            ViewBag.Layout = "_Lab2Layout";
             var employee = _employees.FirstOrDefault(m => m.Id == id);
             return View(employee);
         }
