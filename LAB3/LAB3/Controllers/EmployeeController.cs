@@ -5,6 +5,8 @@ namespace LAB3.Controllers
 {
     public class EmployeeController : Controller
     {
+        [BindProperty]
+        public Employee _employee { get; set; }
         private List<Employee> _employees;
         public EmployeeController()
         {
@@ -96,5 +98,35 @@ namespace LAB3.Controllers
             var employee = _employees.FirstOrDefault(m => m.Id == id);
             return View(employee);
         }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+
+            var movie = _employees.FirstOrDefault(m => m.Id == id);
+            return View(movie);
+
+        }
+        [HttpPost("[controller]/[action]/{id}")]
+        public IActionResult Edit(int id, Employee employee)
+        {
+
+            return View(_employee);
+        }
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+
+            var movie = _employees.FirstOrDefault(m => m.Id == id);
+            return View(movie);
+
+        }
+        [HttpPost("[action]/[controller]/{id}")]
+        public IActionResult Update(int id, [Bind("Id,Name,Surname,Position")] Employee updatedEmployee)
+        {
+
+
+            return View(updatedEmployee);
+        }
+
     }
 }

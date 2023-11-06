@@ -28,20 +28,11 @@
     @foreach (var employee in Model)
     {
         <tr>
+                @Html.DisplayFor(modelItem => employee,"EmployeeListItem")
             <td>
-                @employee.Name
-            </td>
-            <td>
-                @employee.Surname
-            </td>
-            <td>
-                @employee.BirthDate.ToString("dd.MM.yyyy")
-            </td>
-            <td>
-                @employee.Position
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@employee.Id">Details</a>
+                <item-link controller-name="Employee" action-name="Details" item-id="@employee.Id" display-text="Details"></item-link>|
+                <item-link controller-name="Employee" action-name="Edit" item-id="@employee.Id" display-text="Edit"></item-link>|
+                <item-link controller-name="Employee" action-name="Update" item-id="@employee.Id" display-text="Update"></item-link>|
             </td>
         </tr>
     }
