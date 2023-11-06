@@ -102,8 +102,8 @@ namespace LAB3.Controllers
         public IActionResult Edit(int id)
         {
 
-            var movie = _employees.FirstOrDefault(m => m.Id == id);
-            return View(movie);
+            var employee = _employees.FirstOrDefault(m => m.Id == id);
+            return View(employee);
 
         }
         [HttpPost("[controller]/[action]/{id}")]
@@ -116,8 +116,8 @@ namespace LAB3.Controllers
         public IActionResult Update(int id)
         {
 
-            var movie = _employees.FirstOrDefault(m => m.Id == id);
-            return View(movie);
+            var employee = _employees.FirstOrDefault(m => m.Id == id);
+            return View(employee);
 
         }
         [HttpPost("[action]/[controller]/{id}")]
