@@ -3,8 +3,15 @@
     Layout = ViewBag.Layout;
     ViewData["Title"] = "Index";
 }
-<h1>Employees</h1>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1>Employees</h1>
+    <button type="button" class="btn btn-primary"
+            onclick="location.href='/Employee/Create'">
+        Create
+    </button>
+</div>
 <hr />
+
 
 <table class="table">
 <thead>
@@ -31,8 +38,7 @@
                 @Html.DisplayFor(modelItem => employee,"EmployeeListItem")
             <td>
                 <item-link controller-name="Employee" action-name="Details" item-id="@employee.Id" display-text="Details"></item-link>|
-                <item-link controller-name="Employee" action-name="Edit" item-id="@employee.Id" display-text="Edit"></item-link>|
-                <item-link controller-name="Employee" action-name="Update" item-id="@employee.Id" display-text="Update"></item-link>|
+                <item-link controller-name="Employee" action-name="Edit" item-id="@employee.Id" display-text="Edit"></item-link>
             </td>
         </tr>
     }

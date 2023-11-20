@@ -4,6 +4,7 @@ namespace LAB4.Models
 {
     public class Employee
     {
+        [Key]
         public int Id { get; set; }
         [Required]
         [MinLength(3)]
