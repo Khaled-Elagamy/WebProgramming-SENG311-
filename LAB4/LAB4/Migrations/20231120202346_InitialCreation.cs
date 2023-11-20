@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LAB4.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialCreation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,14 +35,14 @@ namespace LAB4.Migrations
                 columns: new[] { "Id", "BirthDate", "Image", "Name", "Position", "Surname" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1995, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/Jacob.jpg", "Jacob", "Manager", "Hawk" },
-                    { 2, new DateTime(2000, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/Elizabeth.jpg", "Elizabeth", "Software Engineer", "Geil" },
-                    { 3, new DateTime(1997, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/Kate.jpg", "Kate", "Admin", "Metain" },
-                    { 4, new DateTime(1990, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/Michael.jpg", "Michael", "Marketing expert", "Cook" },
-                    { 5, new DateTime(2001, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/John.jpg", "John", "Software Engineer", "Snow" },
-                    { 6, new DateTime(1999, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/Nina.jpg", "Nina", "Software Engineer", "Soprano" },
-                    { 7, new DateTime(2000, 5, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/Tina.jpg", "Tina", "Team Leader", "Fins" },
-                    { 8, new DateTime(1992, 12, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/Martin.jpg", "Martin", "Marketing Expert", "Simpson" }
+                    { 1, new DateTime(1992, 12, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/Martin.jpg", "Martin", "Marketing Expert", "Simpson" },
+                    { 2, new DateTime(1995, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/Jacob.jpg", "Jacob", "Manager", "Hawk" },
+                    { 3, new DateTime(2000, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/Elizabeth.jpg", "Elizabeth", "Software Engineer", "Geil" },
+                    { 4, new DateTime(1997, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/Kate.jpg", "Kate", "Admin", "Metain" },
+                    { 5, new DateTime(1990, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/Michael.jpg", "Michael", "Marketing expert", "Cook" },
+                    { 6, new DateTime(2001, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/John.jpg", "John", "Software Engineer", "Snow" },
+                    { 7, new DateTime(1999, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/Nina.jpg", "Nina", "Software Engineer", "Soprano" },
+                    { 8, new DateTime(2000, 5, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "/images/Tina.jpg", "Tina", "Team Leader", "Fins" }
                 });
         }
 

@@ -10,7 +10,7 @@ namespace LAB4.Models
             builder.HasData(
                  new Employee
                  {
-                     Id = 8,
+                     Id = 1,
                      Name = "Martin",
                      Surname = "Simpson",
                      BirthDate = new DateTime(1992, 12, 3),
@@ -19,7 +19,7 @@ namespace LAB4.Models
                  },
             new Employee
             {
-                Id = 1,
+                Id = 2,
                 Name = "Jacob",
                 Surname = "Hawk",
                 BirthDate = new DateTime(1995, 10, 2),
@@ -28,7 +28,7 @@ namespace LAB4.Models
             },
             new Employee
             {
-                Id = 2,
+                Id = 3,
                 Name = "Elizabeth",
                 Surname = "Geil",
                 BirthDate = new DateTime(2000, 1, 7),
@@ -37,7 +37,7 @@ namespace LAB4.Models
             },
             new Employee
             {
-                Id = 3,
+                Id = 4,
                 Name = "Kate",
                 Surname = "Metain",
                 BirthDate = new DateTime(1997, 2, 13),
@@ -46,7 +46,7 @@ namespace LAB4.Models
             },
             new Employee
             {
-                Id = 4,
+                Id = 5,
                 Name = "Michael",
                 Surname = "Cook",
                 BirthDate = new DateTime(1990, 12, 25),
@@ -55,7 +55,7 @@ namespace LAB4.Models
             },
             new Employee
             {
-                Id = 5,
+                Id = 6,
                 Name = "John",
                 Surname = "Snow",
                 BirthDate = new DateTime(2001, 7, 15),
@@ -64,7 +64,7 @@ namespace LAB4.Models
             },
             new Employee
             {
-                Id = 6,
+                Id = 7,
                 Name = "Nina",
                 Surname = "Soprano",
                 BirthDate = new DateTime(1999, 9, 30),
@@ -73,7 +73,7 @@ namespace LAB4.Models
             },
             new Employee
             {
-                Id = 7,
+                Id = 8,
                 Name = "Tina",
                 Surname = "Fins",
                 BirthDate = new DateTime(2000, 5, 14),

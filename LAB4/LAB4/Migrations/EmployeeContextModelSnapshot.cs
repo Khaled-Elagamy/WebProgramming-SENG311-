@@ -58,7 +58,7 @@ namespace LAB4.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 8,
+                            Id = 1,
                             BirthDate = new DateTime(1992, 12, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "/images/Martin.jpg",
                             Name = "Martin",
@@ -67,7 +67,7 @@ namespace LAB4.Migrations
                         },
                         new
                         {
-                            Id = 1,
+                            Id = 2,
                             BirthDate = new DateTime(1995, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "/images/Jacob.jpg",
                             Name = "Jacob",
@@ -76,7 +76,7 @@ namespace LAB4.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 3,
                             BirthDate = new DateTime(2000, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "/images/Elizabeth.jpg",
                             Name = "Elizabeth",
@@ -85,7 +85,7 @@ namespace LAB4.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 4,
                             BirthDate = new DateTime(1997, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "/images/Kate.jpg",
                             Name = "Kate",
@@ -94,7 +94,7 @@ namespace LAB4.Migrations
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 5,
                             BirthDate = new DateTime(1990, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "/images/Michael.jpg",
                             Name = "Michael",
@@ -103,7 +103,7 @@ namespace LAB4.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 6,
                             BirthDate = new DateTime(2001, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "/images/John.jpg",
                             Name = "John",
@@ -112,7 +112,7 @@ namespace LAB4.Migrations
                         },
                         new
                         {
-                            Id = 6,
+                            Id = 7,
                             BirthDate = new DateTime(1999, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "/images/Nina.jpg",
                             Name = "Nina",
@@ -121,7 +121,7 @@ namespace LAB4.Migrations
                         },
                         new
                         {
-                            Id = 7,
+                            Id = 8,
                             BirthDate = new DateTime(2000, 5, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Image = "/images/Tina.jpg",
                             Name = "Tina",
