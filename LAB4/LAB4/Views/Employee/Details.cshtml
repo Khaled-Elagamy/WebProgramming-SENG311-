@@ -30,7 +30,7 @@
 
         </div>
         <div class="col-sm-4">
-            <img class="image" src="@Url.Content(Model.Image)" alt="@Model.Name" width="150" height="150" />
+            <img class="image" src="@Url.Content(Model.Image)" alt="@Model.Name" width="150" height="150" onerror="handleImageError(this)" />
         </div>
     </div>
     @await Html.PartialAsync("Summary", Model)
@@ -38,3 +38,11 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+
+<script>
+    function handleImageError(img) {
+        img.src = '/images/noimage.jpg';
+        img.alt = 'Default Image';
+    }
+</script>
