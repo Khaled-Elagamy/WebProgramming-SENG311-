@@ -4,6 +4,7 @@ using LAB5.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LAB5.Migrations
 {
     [DbContext(typeof(EmployeeContext))]
-    partial class EmployeeContextModelSnapshot : ModelSnapshot
+    [Migration("20231124140223_AddSalaryInfo")]
+    partial class AddSalaryInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -218,19 +221,11 @@ namespace LAB5.Migrations
 
             modelBuilder.Entity("LAB5.Models.SalaryInfo", b =>
                 {
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Gross")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(???,2)");
 
                     b.Property<decimal>("Net")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("EmployeeId");
-
-                    b.HasIndex(new[] { "EmployeeId" }, "IX_SalaryInfo_EmployeeId")
-                        .IsUnique();
+                        .HasColumnType("decimal(???,2)");
 
                     b.ToTable("SalaryInfo");
                 });
@@ -246,25 +241,9 @@ namespace LAB5.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("LAB5.Models.SalaryInfo", b =>
-                {
-                    b.HasOne("LAB5.Models.Employee", "Employee")
-                        .WithOne("SalaryInfo")
-                        .HasForeignKey("LAB5.Models.SalaryInfo", "EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
             modelBuilder.Entity("LAB5.Models.Company", b =>
                 {
                     b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("LAB5.Models.Employee", b =>
-                {
-                    b.Navigation("SalaryInfo");
                 });
 #pragma warning restore 612, 618
         }

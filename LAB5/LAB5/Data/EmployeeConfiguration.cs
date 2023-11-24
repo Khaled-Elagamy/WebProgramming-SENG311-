@@ -1,12 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LAB5.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace LAB5.Models
+namespace LAB5.Data
 {
     public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
     {
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
+            builder.Property(e => e.Name).IsRequired().HasMaxLength(50);
+            builder.Property(e => e.Surname).IsRequired().HasMaxLength(50);
+            builder.Property(e => e.Position).IsRequired().HasMaxLength(100);
+            builder.HasOne(e => e.SalaryInfo)
+                    .WithOne(si => si.Employee)
+                    .HasForeignKey<SalaryInfo>(si => si.EmployeeId);
             builder.HasData(
                  new Employee
                  {

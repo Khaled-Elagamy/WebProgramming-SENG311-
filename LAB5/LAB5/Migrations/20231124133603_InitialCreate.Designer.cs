@@ -4,6 +4,7 @@ using LAB5.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LAB5.Migrations
 {
     [DbContext(typeof(EmployeeContext))]
-    partial class EmployeeContextModelSnapshot : ModelSnapshot
+    [Migration("20231124133603_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,9 +109,6 @@ namespace LAB5.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
@@ -129,8 +129,6 @@ namespace LAB5.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
-
                     b.ToTable("Employees");
 
                     b.HasData(
@@ -138,7 +136,6 @@ namespace LAB5.Migrations
                         {
                             Id = 1,
                             BirthDate = new DateTime(1992, 12, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CompanyId = 0,
                             Image = "/images/Martin.jpg",
                             Name = "Martin",
                             Position = "Marketing Expert",
@@ -148,7 +145,6 @@ namespace LAB5.Migrations
                         {
                             Id = 2,
                             BirthDate = new DateTime(1995, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CompanyId = 0,
                             Image = "/images/Jacob.jpg",
                             Name = "Jacob",
                             Position = "Manager",
@@ -158,7 +154,6 @@ namespace LAB5.Migrations
                         {
                             Id = 3,
                             BirthDate = new DateTime(2000, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CompanyId = 0,
                             Image = "/images/Elizabeth.jpg",
                             Name = "Elizabeth",
                             Position = "Software Engineer",
@@ -168,7 +163,6 @@ namespace LAB5.Migrations
                         {
                             Id = 4,
                             BirthDate = new DateTime(1997, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CompanyId = 0,
                             Image = "/images/Kate.jpg",
                             Name = "Kate",
                             Position = "Admin",
@@ -178,7 +172,6 @@ namespace LAB5.Migrations
                         {
                             Id = 5,
                             BirthDate = new DateTime(1990, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CompanyId = 0,
                             Image = "/images/Michael.jpg",
                             Name = "Michael",
                             Position = "Marketing expert",
@@ -188,7 +181,6 @@ namespace LAB5.Migrations
                         {
                             Id = 6,
                             BirthDate = new DateTime(2001, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CompanyId = 0,
                             Image = "/images/John.jpg",
                             Name = "John",
                             Position = "Software Engineer",
@@ -198,7 +190,6 @@ namespace LAB5.Migrations
                         {
                             Id = 7,
                             BirthDate = new DateTime(1999, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CompanyId = 0,
                             Image = "/images/Nina.jpg",
                             Name = "Nina",
                             Position = "Software Engineer",
@@ -208,63 +199,11 @@ namespace LAB5.Migrations
                         {
                             Id = 8,
                             BirthDate = new DateTime(2000, 5, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CompanyId = 0,
                             Image = "/images/Tina.jpg",
                             Name = "Tina",
                             Position = "Team Leader",
                             Surname = "Fins"
                         });
-                });
-
-            modelBuilder.Entity("LAB5.Models.SalaryInfo", b =>
-                {
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Gross")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Net")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("EmployeeId");
-
-                    b.HasIndex(new[] { "EmployeeId" }, "IX_SalaryInfo_EmployeeId")
-                        .IsUnique();
-
-                    b.ToTable("SalaryInfo");
-                });
-
-            modelBuilder.Entity("LAB5.Models.Employee", b =>
-                {
-                    b.HasOne("LAB5.Models.Company", "Company")
-                        .WithMany("Employees")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-                });
-
-            modelBuilder.Entity("LAB5.Models.SalaryInfo", b =>
-                {
-                    b.HasOne("LAB5.Models.Employee", "Employee")
-                        .WithOne("SalaryInfo")
-                        .HasForeignKey("LAB5.Models.SalaryInfo", "EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
-            modelBuilder.Entity("LAB5.Models.Company", b =>
-                {
-                    b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("LAB5.Models.Employee", b =>
-                {
-                    b.Navigation("SalaryInfo");
                 });
 #pragma warning restore 612, 618
         }

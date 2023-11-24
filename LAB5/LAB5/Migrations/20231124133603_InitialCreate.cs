@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -7,11 +8,27 @@
 namespace LAB5.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreation : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Companies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Zipcode = table.Column<int>(type: "int", fixedLength: true, maxLength: 5, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Companies", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Employees",
                 columns: table => new
@@ -27,6 +44,18 @@ namespace LAB5.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.Id);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Companies",
+                columns: new[] { "Id", "City", "Country", "Name", "Zipcode" },
+                values: new object[,]
+                {
+                    { 1, "New York", "USA", "Acme Corporation", 10001 },
+                    { 2, "San Francisco", "USA", "Tech Solutions Ltd.", 94105 },
+                    { 3, "Paris", "France", "EuroTech Innovators", 75001 },
+                    { 4, "Singapore", "Singapore", "Sunrise Global", 4854 },
+                    { 5, "Melbourne", "Australia", "Down Under Enterprises", 3000 }
                 });
 
             migrationBuilder.InsertData(
@@ -48,6 +77,9 @@ namespace LAB5.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Companies");
+
             migrationBuilder.DropTable(
                 name: "Employees");
         }
