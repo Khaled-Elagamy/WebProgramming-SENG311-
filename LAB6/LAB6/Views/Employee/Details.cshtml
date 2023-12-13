@@ -34,7 +34,7 @@
 
         </div>
         <div class="col-sm-4">
-            <img class="image" src="@Url.Content(Model.Image)" alt="@Model.Name" width="150" height="150" onerror="handleImageError(this)" />
+            <img class="image" src="@Url.Content(Model.Image ?? "/images/noimage.jpg")" alt="@Model.Name" width="150" height="150" onerror="handleImageError(this)" />
         </div>
     </div>
     @await Html.PartialAsync("Summary", Model)

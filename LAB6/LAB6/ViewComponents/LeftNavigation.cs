@@ -8,6 +8,8 @@ public class LeftNavigation : ViewComponent
         {
             new NavLink("Home", "Index","Home"),
             new NavLink("Employee", "Index","Employees"),
+            new NavLink("Employee", "SalaryDetails","SalaryDetails"),
+            new NavLink("Company", "Index","Companies"),
             new NavLink("Home", "Privacy","Privacy"),
 
         };

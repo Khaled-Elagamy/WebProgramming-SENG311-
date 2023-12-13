@@ -5,8 +5,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+// Configure the application services
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
 builder.Services.AddDbContext<EmployeeContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Server=(localdb)\\mssqllocaldb;Database=EmployeeDB;Trusted_Connection=True;")));
+    options.UseSqlServer(configuration.GetConnectionString("EmployeeDatabase")));
 
 
 var app = builder.Build();

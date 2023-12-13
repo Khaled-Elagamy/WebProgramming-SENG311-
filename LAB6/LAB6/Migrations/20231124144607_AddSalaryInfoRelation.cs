@@ -21,7 +21,20 @@ namespace LAB6.Migrations
                 name: "PK_SalaryInfo",
                 table: "SalaryInfo",
                 column: "EmployeeId");
-
+            migrationBuilder.InsertData(
+                table: "SalaryInfo",
+                columns: new[] { "EmployeeId", "Net", "Gross" },
+                values: new object[,]
+                {
+                    { 1, 5000, 6000 },
+                    { 2, 5000, 6000 },
+                    { 3, 5000, 6000 },
+                    { 4, 5000, 6000 },
+                    { 5, 5000, 6000 },
+                    { 6, 5000, 6000 },
+                    { 7, 5000, 6000 },
+                    { 8, 5000, 6000 },
+                });
             migrationBuilder.CreateIndex(
                 name: "IX_SalaryInfo_EmployeeId",
                 table: "SalaryInfo",

@@ -19,7 +19,24 @@ namespace LAB6.Controllers
             _context = context;
             _hostingEnvironment = hostingEnvironment;
         }
+        public IActionResult SalaryDetails()
+        {
+            ViewBag.Layout = "_Lab2Layout";
+            var employeeSalaryList = _context.Employees
+            .Include(e => e.Company)
+            .Include(e => e.SalaryInfo)
+            .Select(e => new EmployeeSalaryDto
+            {
+                Id = e.Id,
+                FullName = $"{e.Name} {e.Surname}",
+                CompanyName = e.Company.Name,
+                NetSalary = e.SalaryInfo.Net,
+                GrossSalary = e.SalaryInfo.Gross
+            })
+            .ToList();
 
+            return View(employeeSalaryList);
+        }
         public async Task<IActionResult> Index()
         {
             ViewBag.Layout = "_Lab2Layout";
@@ -52,17 +69,23 @@ namespace LAB6.Controllers
             {
                 return NotFound();
             }
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await _context.Employees
+                .Include(e => e.SalaryInfo)
+                .FirstOrDefaultAsync(e => e.Id == id);
             if (employee == null)
             {
                 return NotFound();
+            }
+            if (employee.SalaryInfo == null)
+            {
+                employee.SalaryInfo = new SalaryInfo();
             }
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Name", employee.CompanyId);
             return View(employee);
         }
         [HttpPost("[controller]/[action]/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Surname,BirthDate,Position,Image,CompanyId")] Employee updatedEmployee, IFormFile image)
+        public async Task<IActionResult> Edit(int id, Employee updatedEmployee, IFormFile image)
         {
             if (id != updatedEmployee.Id)
             {
@@ -112,6 +135,8 @@ namespace LAB6.Controllers
                         employee.Property(e => e.Image).IsModified = false;
                     }
                     await _context.SaveChangesAsync();
+                    await SaveSalaryInfo(updatedEmployee.Id, updatedEmployee.SalaryInfo);
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -130,6 +155,22 @@ namespace LAB6.Controllers
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Name", updatedEmployee.CompanyId);
             return View(updatedEmployee);
         }
+        private async Task SaveSalaryInfo(int employeeId, SalaryInfo salaryInfo)
+        {
+            var existingSalaryInfo = await _context.SalaryInfo.FirstOrDefaultAsync(si => si.EmployeeId == employeeId);
+
+            if (existingSalaryInfo != null)
+            {
+                existingSalaryInfo.Net = salaryInfo.Net;
+                existingSalaryInfo.Gross = salaryInfo.Gross;
+            }
+            else
+            {
+                salaryInfo.EmployeeId = employeeId;
+                _context.SalaryInfo.Add(salaryInfo);
+            }
+            await _context.SaveChangesAsync();
+        }
         [HttpGet]
         public IActionResult Create()
         {
@@ -139,11 +180,15 @@ namespace LAB6.Controllers
         }
         [HttpPost("[action]/[controller]")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Surname,BirthDate,Position,Image,CompanyId")] Employee employee, IFormFile image)
+        public async Task<IActionResult> Create(Employee employee, IFormFile image)
 
         {
             if (ModelState.IsValid)
             {
+                if (employee.SalaryInfo == null)
+                {
+                    employee.SalaryInfo = new SalaryInfo();
+                }
                 if (image != null && image.Length > 0)
                 {
                     // Generate a unique filename
@@ -216,5 +261,8 @@ namespace LAB6.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+
+
     }
 }
