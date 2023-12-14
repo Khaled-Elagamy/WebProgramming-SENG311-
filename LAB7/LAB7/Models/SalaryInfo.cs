@@ -10,9 +10,9 @@ namespace LAB7.Models
         public Employee Employee { get; set; }
         [Required]
         [DefaultValue(0)]
-        public decimal Net { get; set; }
+        public decimal? Net { get; set; }
         [Required]
         [DefaultValue(0)]
-        public decimal Gross { get; set; }
+        public decimal? Gross { get; set; }
     }
 }

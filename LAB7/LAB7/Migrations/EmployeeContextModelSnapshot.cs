@@ -221,10 +221,12 @@ namespace LAB7.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Gross")
+                    b.Property<decimal?>("Gross")
+                        .IsRequired()
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("Net")
+                    b.Property<decimal?>("Net")
+                        .IsRequired()
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("EmployeeId");

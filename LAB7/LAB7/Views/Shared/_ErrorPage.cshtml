@@ -1,0 +1,9 @@
+﻿<!-- Views/Shared/Error.cshtml -->
+@{
+    ViewData["Title"] = "Error";
+    Layout = "_Layout"; // Use your layout file
+}
+
+<h1>An unexpected error occurred</h1>
+<p>We apologize for the inconvenience. Please try again later.</p>
+<a href="@Url.Action("Index", "Employee")" class="btn btn-primary">Go to Employees Page</a>

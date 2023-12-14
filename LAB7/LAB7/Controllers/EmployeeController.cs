@@ -1,4 +1,5 @@
 ﻿using LAB7.Data;
+using LAB7.Filters;
 using LAB7.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -30,8 +31,8 @@ namespace LAB7.Controllers
                 Id = e.Id,
                 FullName = $"{e.Name} {e.Surname}",
                 CompanyName = e.Company.Name,
-                NetSalary = e.SalaryInfo.Net,
-                GrossSalary = e.SalaryInfo.Gross
+                NetSalary = e.SalaryInfo.Net ?? 0.0m,
+                GrossSalary = e.SalaryInfo.Gross ?? 0.0m
             })
             .ToList();
 
@@ -83,6 +84,7 @@ namespace LAB7.Controllers
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Name", employee.CompanyId);
             return View(employee);
         }
+        [TypeFilter(typeof(CustomFilter))]
         [HttpPost("[controller]/[action]/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Employee updatedEmployee, IFormFile image)
@@ -114,11 +116,14 @@ namespace LAB7.Controllers
 
                             // Update the image path only if a new image is provided
                             // Delete the old image file if it exists
-
-                            var oldImagePath = Path.Combine(_hostingEnvironment.WebRootPath, "images", updatedEmployee.Image.Replace("/images/", ""));
-                            if (System.IO.File.Exists(oldImagePath))
+                            if (updatedEmployee.Image != null)
                             {
-                                System.IO.File.Delete(oldImagePath);
+
+                                var oldImagePath = Path.Combine(_hostingEnvironment.WebRootPath, "images", updatedEmployee.Image.Replace("/images/", ""));
+                                if (System.IO.File.Exists(oldImagePath))
+                                {
+                                    System.IO.File.Delete(oldImagePath);
+                                }
                             }
                             updatedEmployee.Image = "/images/" + uniqueFileName;
                         }
@@ -151,7 +156,6 @@ namespace LAB7.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ModelState.AddModelError("", "Something went wrong");
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Name", updatedEmployee.CompanyId);
             return View(updatedEmployee);
         }
@@ -178,6 +182,7 @@ namespace LAB7.Controllers
             return View();
 
         }
+        [TypeFilter(typeof(CustomFilter))]
         [HttpPost("[action]/[controller]")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Employee employee, IFormFile image)
@@ -206,7 +211,7 @@ namespace LAB7.Controllers
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
-                        ModelState.AddModelError("", "Something went wrong");
+                        ModelState.AddModelError("", "Something went wrong while saving the image\n Try again later");
                     }
                     employee.Image = "/images/" + uniqueFileName;
                 }
@@ -214,7 +219,6 @@ namespace LAB7.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ModelState.AddModelError("", "Something went wrong");
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Name", employee.CompanyId);
             return View(employee);
         }
